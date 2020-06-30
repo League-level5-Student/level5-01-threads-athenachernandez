@@ -6,9 +6,10 @@ package _05_Synchronized_Swimming;
  *
  * Challenge: Complete the run() method, using a for-loop to swim 5 laps by calling
  * the static takeTurn() method in SynchronizedSwimming.
- */
+ */ 
 public class Swimmer extends Thread {
 	public final String name;
+	SynchronizedSwimming ss = new SynchronizedSwimming();
 
 	public Swimmer(String name) {
 		this.name = name;
@@ -16,6 +17,8 @@ public class Swimmer extends Thread {
 
 	@Override
 	public void run() {
-		// ...
+		for (int i = 0; i < 5; i++) {
+			ss.takeTurn(this);
+		}
 	}
 }

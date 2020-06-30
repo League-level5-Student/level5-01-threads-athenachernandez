@@ -1,48 +1,84 @@
 package _01_Olympic_Rings;
 
-import java.util.ArrayList;
+import java.awt.Color;
 
 import org.jointheleague.graphical.robot.Robot;
 
 public class OlympicRings_Threaded {
-	static ArrayList<Robot> robots = new ArrayList<Robot>();
 
 	// Make A Program that uses Threads and robots to draw the Olympic rings. One
 	// robot should draw one ring simultaneously with the other 4 robots.
 	public static void main(String[] args) {
-		Robot blue = new Robot(400, 700);
-		Robot yellow = new Robot(400, 700);
-		Robot black = new Robot(400, 700);
-		Robot green = new Robot(400, 700);
-		Robot red = new Robot(400, 700);
+		Robot blue = new Robot(500, 500);
+		Robot yellow = new Robot(550, 600);
+		Robot black = new Robot(600, 500);
+		Robot green = new Robot(650, 600);
+		Robot red = new Robot(700, 500);
+ 
+		blue.setSpeed(5);
+		yellow.setSpeed(5);
+		black.setSpeed(5);
+		green.setSpeed(5);
+		red.setSpeed(5);
 
-		robots.add(blue);
-		robots.add(yellow);
-		robots.add(black);
-		robots.add(green);
-		robots.add(red);
+		Thread blueC = new Thread(() -> {
+			blue.setSpeed(100);
+			blue.setPenColor(Color.blue);
+			blue.penDown();
 
-		blue.setSpeed(10);
-		yellow.setSpeed(10);
-		black.setSpeed(10);
-		green.setSpeed(10);
-		red.setSpeed(10);
+			for (int i = 0; i < 360; i++) {
+				blue.move(1);
+				blue.turn(1);
+			}
+		});
 
-		Thread r6 = null;
-		Thread r6turn = null;
-		for (int j = 0; j < 360; j++) {
-			 r6 = new Thread(() -> blue.move(1));
-			 r6turn = new Thread(() -> blue.turn(1));
-		}
+		Thread blackC = new Thread(() -> {
+			black.setSpeed(100);
+			black.penDown();
 
-//		Thread r1 = new Thread(() -> blue.move(400));
-//		Thread r2 = new Thread(() -> yellow.move(400));
-//		Thread r3 = new Thread(() -> black.move(400));
-//		Thread r4 = new Thread(() -> green.move(400));
-//		Thread r5 = new Thread(() -> red.move(400));
-
+			for (int i = 0; i < 360; i++) {
+				black.move(1);
+				black.turn(1);
+			}
+		});
 		
-		r6.start();
-		r6turn.start();
+		Thread yellowC = new Thread(() -> {
+			yellow.setSpeed(100);
+			yellow.setPenColor(Color.yellow);
+			yellow.penDown();
+
+			for (int i = 0; i < 360; i++) {
+				yellow.move(1);
+				yellow.turn(1);
+			}
+		});
+		
+		Thread greenC = new Thread(() -> {
+			green.setSpeed(100);
+			green.setPenColor(Color.green);
+			green.penDown();
+
+			for (int i = 0; i < 360; i++) {
+				green.move(1);
+				green.turn(1);
+			}
+		});
+		
+		Thread redC = new Thread(() -> {
+			red.setSpeed(100);
+			red.setPenColor(Color.red);
+			red.penDown();
+
+			for (int i = 0; i < 360; i++) {
+				red.move(1);
+				red.turn(1);
+			}
+		});
+
+		blueC.start();
+		yellowC.start();
+		blackC.start();
+		greenC.start();
+		redC.start();
 	}
 }

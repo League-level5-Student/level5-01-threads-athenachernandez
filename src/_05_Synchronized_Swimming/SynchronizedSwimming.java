@@ -12,7 +12,7 @@ package _05_Synchronized_Swimming;
  * pool is not big enough for both of them. These are world-class swimmers, and it only
  * takes them 2 seconds to complete a lap! They have agreed to each take turns swimming
  * one lap at a time. Your job is to make sure they follow the rules.
- */
+ */ 
 public class SynchronizedSwimming {
 	private static final Object swimmingPool = new Object();
 
